@@ -1,4 +1,4 @@
-const Alert = ({ type = 'danger' }) => {
-  return <div className={`alert alert-${type}`}>alert goes here</div>;
+const Alert = ({ alertType, alertText }) => {
+  return <div className={`alert alert-${alertType}`}>{alertText}</div>;
 };
 export default Alert;
