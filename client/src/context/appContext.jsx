@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-export const initialState = {
+const initialState = {
   isLoading: false,
   showAlert: false,
   alertText: '',
@@ -17,8 +17,8 @@ function AppProvider({ children }) {
   );
 }
 
-export const useAppContext = () => {
+const useAppContext = () => {
   return useContext(AppContext);
 };
 
-export { AppProvider };
+export { AppProvider, useAppContext, initialState };
