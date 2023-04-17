@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/styledWrappers/LandingPage';
 import { Logo } from '../components';
@@ -20,7 +21,9 @@ function Landing() {
             man braid disrupt. Occupy chia tofu vaporware dreamcatcher try-hard.
             Pinterest vinyl kogi bodega boys.
           </p>
-          <div className="btn btn-hero">Login/Register</div>
+          <Link to="/register" className="btn btn-hero">
+            Login/Register
+          </Link>
         </div>
 
         <img src={main} alt="job hunt" className="img main-img" />
