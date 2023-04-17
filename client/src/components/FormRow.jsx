@@ -1,4 +1,10 @@
-function FormRow({ type = 'text', name, value, onChange, labelText = name }) {
+function FormRow({
+  type = 'text',
+  name,
+  value,
+  handleChange,
+  labelText = name,
+}) {
   return (
     <div className="form-row">
       <label htmlFor={name} className="form-label">
@@ -8,7 +14,7 @@ function FormRow({ type = 'text', name, value, onChange, labelText = name }) {
         type={type}
         value={value}
         name={name}
-        onChange={onChange}
+        onChange={handleChange}
         className="form-input"
         id={name}
       />
