@@ -12,24 +12,29 @@ const initialValues = {
 
 function Register() {
   const [values, setValues] = useState(initialValues);
-  const { isLoading, showAlert } = useAppContext();
+  const { isLoading, showAlert, displayAlert } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
 
-  const onChange = (e) => {
-    console.log(e.target);
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      displayAlert();
+      return;
+    }
+    console.log(values);
   };
 
   return (
     <Wrapper className="full-page">
-      <form className="form" onSubmit={onSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <Logo />
         <h3>{values.isMember ? 'Login' : 'Register'}</h3>
         {showAlert && <Alert />}
@@ -38,20 +43,20 @@ function Register() {
             type="text"
             name="name"
             value={values.name}
-            onChange={onChange}
+            handleChange={handleChange}
           />
         )}
         <FormRow
           type="email"
           name="email"
           value={values.email}
-          onChange={onChange}
+          handleChange={handleChange}
         />
         <FormRow
           type="password"
           name="password"
           value={values.password}
-          onChange={onChange}
+          handleChange={handleChange}
         />
 
         <button type="submit" className="btn btn-block">
