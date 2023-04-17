@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Logo, FormRow } from '../components';
+import { Logo, FormRow, Alert } from '../components';
 import Wrapper from '../assets/styledWrappers/RegisterPage';
 
 const initialValues = {
@@ -7,6 +7,7 @@ const initialValues = {
   email: '',
   password: '',
   isMember: true,
+  showAlert: false,
 };
 
 function Register() {
@@ -26,6 +27,7 @@ function Register() {
       <form className="form" onSubmit={onSubmit}>
         <Logo />
         <h3>Login</h3>
+        {values.showAlert && <Alert />}
         <FormRow
           type="text"
           name="name"
