@@ -32,7 +32,7 @@ function Register() {
         <Logo />
         <h3>{values.isMember ? 'Login' : 'Register'}</h3>
         {values.showAlert && <Alert />}
-        {values.isMember && (
+        {!values.isMember && (
           <FormRow
             type="text"
             name="name"
