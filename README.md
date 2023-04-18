@@ -11,6 +11,7 @@ A job tracking MERN application.
 - JWT
 - validator
 - bcrypt
+- express-async-errors
 
 <!-- #### To setup the project locally
 
