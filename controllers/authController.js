@@ -5,7 +5,7 @@ const register = async (req, res, next) => {
     const user = await User.create(req.body);
     res.status(201).json({ user });
   } catch (error) {
-    next(error);
+    next(error); // pass the error to errorHandler
   }
 };
 
