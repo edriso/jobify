@@ -9,6 +9,7 @@ A job tracking MERN application.
 - React.js
 - styled-components
 - JWT
+- validator
 - bcrypt
 
 <!-- #### To setup the project locally
