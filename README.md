@@ -2,13 +2,16 @@
 
 A job tracking MERN application.
 
+- Where user can register, login, and update account
+- Then user can create job applications, and keep track of them, and only that user who can see, or modify the job using JWT
+
 #### Technologies and packages I used
 
 - Node.js, Express.js
 - MongoDB, Mongoose
 - React.js
 - styled-components
-- JWT
+- jsonwebtoken (JWT)
 - validator, to validate inputs like email
 - bcryptjs, for hashing passwords
 - express-async-errors, for errors handling
@@ -22,6 +25,7 @@ A job tracking MERN application.
 - [favicon generator](https://favicon.io/)
 - [illustration images](https://undraw.co/)
 - [hipster ipsum](https://hipsum.co/)
+- [keys generator](https://www.allkeysgenerator.com/)
 - In client(frontend folder), Why styledWrappers folder is not containing index.js that exports its files like in components or pages folders?
   - Because a component or a page might import only 1 styledWrapper, while it usually imports many components. So, a better approach to not having many lines of import components, is to have an index.js file that imports all the other components.
   - So, instead of writing:
