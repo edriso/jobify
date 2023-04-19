@@ -8,6 +8,12 @@ const register = async (req, res) => {
     throw new BadRequestError('Some values missing');
   }
 
+  const userAlreadyExist = await User.findOne({ email });
+
+  if (userAlreadyExist) {
+    throw new BadRequestError('Duplicate email');
+  }
+
   const user = await User.create({ name, email, password });
 
   res.status(201).json({ user });
