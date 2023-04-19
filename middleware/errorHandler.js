@@ -1,6 +1,6 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
   const defaultError = {
-    status: 500,
+    status: err.status || 500,
     message: err.message || 'Something went wrong!',
   };
 
