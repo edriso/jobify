@@ -34,3 +34,4 @@ A job tracking MERN application.
     ```javascript
     import { component1, component2, component3 } from './components';
     ```
+- In mongoose, when using the pre hook for saving user for example; be aware when updating the user as using findOneAndUpdate will NOT trigger that hook, instead use user.save() for updating to trigger it.
