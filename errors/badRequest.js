@@ -1,4 +1,4 @@
-import { CustomAPIError } from './customAPI.js';
+import CustomAPIError from './customAPI.js';
 
 class BadRequestError extends CustomAPIError {
   constructor(message) {
@@ -7,4 +7,4 @@ class BadRequestError extends CustomAPIError {
   }
 }
 
-export { BadRequestError };
+export default BadRequestError;

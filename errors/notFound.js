@@ -1,4 +1,4 @@
-import { CustomAPIError } from './customAPI.js';
+import CustomAPIError from './customAPI.js';
 
 class NotFoundError extends CustomAPIError {
   constructor(message) {
@@ -7,4 +7,4 @@ class NotFoundError extends CustomAPIError {
   }
 }
 
-export { NotFoundError };
+export default NotFoundError;
