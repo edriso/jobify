@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import bcryptjs from 'bcryptjs';
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -37,6 +38,11 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model('User', UserSchema);
+userSchema.pre('save', async function () {
+  const salt = await bcryptjs.genSalt(10);
+  this.password = await bcryptjs.hash(this.password, salt);
+});
+
+const User = mongoose.model('User', userSchema);
 
 export default User;
