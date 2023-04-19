@@ -9,9 +9,9 @@ A job tracking MERN application.
 - React.js
 - styled-components
 - JWT
-- validator
-- bcrypt
-- express-async-errors
+- validator, to validate inputs like email
+- bcryptjs, for hashing passwords
+- express-async-errors, for errors handling
 
 <!-- #### To setup the project locally
 
