@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
       validator: validator.isEmail,
       message: 'Invalid email',
     },
-    unique: [true, 'Email already in use'],
+    unique: true,
   },
   password: {
     type: String,
