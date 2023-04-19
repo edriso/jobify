@@ -1,5 +1,18 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
-  res.status(500).json({ message: err });
+  const defaultError = {
+    status: 500,
+    message: 'Something went wrong!',
+  };
+
+  if (err.name === 'ValidationError') {
+    defaultError.status = 400;
+    defaultError.message = Object.values(err.errors)
+      .map((elm) => elm.message)
+      .join(', ');
+  }
+
+  // res.status(defaultError.status).json({ message: err });
+  res.status(defaultError.status).json({ message: defaultError.message });
 };
 
 export default errorHandlerMiddleware;
