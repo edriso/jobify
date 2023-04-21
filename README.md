@@ -15,6 +15,7 @@ A job tracking MERN application.
 - validator, to validate inputs like email
 - bcryptjs, for hashing passwords
 - express-async-errors, for errors handling
+- concurrently, to run multiple commands concurrently
 
 <!-- #### To setup the project locally
 
