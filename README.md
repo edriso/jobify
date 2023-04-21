@@ -16,6 +16,7 @@ A job tracking MERN application.
 - bcryptjs, for hashing passwords
 - express-async-errors, for errors handling
 - concurrently, to run multiple commands concurrently
+- Connect client and server using Proxy - solves CORS problem -
 
 <!-- #### To setup the project locally
 
