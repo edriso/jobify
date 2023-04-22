@@ -17,6 +17,7 @@ A job tracking MERN application.
 - express-async-errors, for errors handling
 - concurrently, to run multiple commands concurrently
 - Connect client and server using Proxy - solves CORS problem -
+- axios
 
 <!-- #### To setup the project locally
 
