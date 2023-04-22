@@ -13,7 +13,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
   if (err.code && err.code === 11000) {
     defaultError.status = 400;
-    defaultError.message = `${Object.keys(err.keyValue)} is already in use`;
+    defaultError.message = `Duplicate ${Object.keys(err.keyValue)}`;
   }
 
   // res.status(defaultError.status).json({ message: err });

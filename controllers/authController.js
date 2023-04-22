@@ -11,7 +11,7 @@ const register = async (req, res) => {
   const userAlreadyExist = await User.findOne({ email });
 
   if (userAlreadyExist) {
-    throw new BadRequestError('Duplicate email');
+    throw new BadRequestError('Email already in use');
   }
 
   const user = await User.create({ name, email, password });
