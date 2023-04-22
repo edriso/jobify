@@ -32,7 +32,7 @@ function AppProvider({ children }) {
   const clearAlert = () => {
     setTimeout(() => {
       dispatch({ type: CLEAR_ALERT });
-    }, 2500);
+    }, 3000);
   };
 
   const registerUser = async (currentUser) => {
