@@ -41,13 +41,13 @@ function AppProvider({ children }) {
     try {
       const response = await axios.post('/api/v1/auth/register', currentUser);
       console.log(response);
-      const { user, token, location } = response.data;
+      const { user, token } = response.data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
         payload: {
           user,
           token,
-          location,
+          location: user.location,
         },
       });
 
