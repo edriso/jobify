@@ -37,8 +37,6 @@ function Register() {
     } else {
       registerUser(currentUser);
     }
-
-    console.log(values);
   };
 
   return (
