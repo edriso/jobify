@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import 'express-async-errors';
 import morgan from 'morgan';
@@ -10,7 +12,7 @@ import errorHandlerMiddleware from './middleware/errorHandler.js';
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 app.use(express.json());
