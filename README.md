@@ -18,6 +18,7 @@ A job tracking MERN application.
 - concurrently, to run multiple commands concurrently
 - Connect client and server using Proxy - solves CORS problem -
 - axios
+- morgan
 
 <!-- #### To setup the project locally
 
