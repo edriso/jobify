@@ -1,5 +1,3 @@
-import Logo from './Logo';
-import FormRow from './FormRow';
-import Alert from './Alert';
-
-export { Logo, FormRow, Alert };
+export { default as Logo } from './Logo';
+export { default as FormRow } from './FormRow';
+export { default as Alert } from './Alert';
