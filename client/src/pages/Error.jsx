@@ -14,7 +14,7 @@ function Error() {
         <img src={notFound} alt="not found" />
         <h3>Page not found</h3>
         <p>We can't seem to find the page you're looking for</p>
-        <Link to="/">Back home</Link>
+        <Link to="/dashboard">Back home</Link>
       </div>
     </Wrapper>
   );
