@@ -7,6 +7,7 @@ import notFound from '../assets/images/not-found.svg';
 
 function Error() {
   // const error = useRouteError();
+  // console.log(error);
   return (
     <Wrapper className="full-page">
       <div>
