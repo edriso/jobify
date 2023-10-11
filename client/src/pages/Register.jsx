@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
 import { Logo, FormRow, Alert } from '../components';
-import Wrapper from '../assets/styledWrappers/RegisterPage';
+import Wrapper from '../assets/styledWrappers/RegisterAndLoginPage';
 
 const initialValues = {
   name: '',

@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  border-radius: var(--borderRadius);
+  border-radius: var(--border-radius);
   width: 100%;
-  background: var(--white);
+  background: var(--background-secondary-color);
   padding: 3rem 2rem 4rem;
-  box-shadow: var(--shadow-2);
-  h3 {
-    margin-top: 0;
+  .form-title {
+    margin-bottom: 2rem;
   }
   .form {
     margin: 0;
@@ -22,28 +21,13 @@ const Wrapper = styled.section`
   }
   .form-center {
     display: grid;
-    row-gap: 0.5rem;
+    row-gap: 1rem;
   }
-  .form-center button {
+  .form-btn {
     align-self: end;
-    height: 35px;
     margin-top: 1rem;
-  }
-  .btn-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1rem;
-    align-self: flex-end;
-    margin-top: 0.5rem;
-    button {
-      height: 35px;
-    }
-  }
-  .clear-btn {
-    background: var(--grey-500);
-  }
-  .clear-btn:hover {
-    background: var(--black);
+    place-items: center;
   }
   @media (min-width: 992px) {
     .form-center {
@@ -51,16 +35,10 @@ const Wrapper = styled.section`
       align-items: center;
       column-gap: 1rem;
     }
-    .btn-container {
-      margin-top: 0;
-    }
   }
   @media (min-width: 1120px) {
     .form-center {
       grid-template-columns: 1fr 1fr 1fr;
-    }
-    .form-center button {
-      margin-top: 0;
     }
   }
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
+  min-height: 100vh;
   display: grid;
   align-items: center;
   .logo {
@@ -12,24 +13,22 @@ const Wrapper = styled.section`
     max-width: 400px;
     border-top: 5px solid var(--primary-500);
   }
-
-  h3 {
+  h4 {
     text-align: center;
+    margin-bottom: 1.38rem;
   }
   p {
-    margin: 0;
     margin-top: 1rem;
     text-align: center;
+    line-height: 1.5;
   }
   .btn {
     margin-top: 1rem;
   }
   .member-btn {
-    background: transparent;
-    border: transparent;
     color: var(--primary-500);
-    cursor: pointer;
-    letter-spacing: var(--letterSpacing);
+    letter-spacing: var(--letter-spacing);
+    margin-left: 0.25rem;
   }
 `;
 export default Wrapper;
