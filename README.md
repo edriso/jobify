@@ -29,7 +29,8 @@ A job tracking MERN application.
 - [favicon generator](https://favicon.io/)
 - [illustration images](https://undraw.co/)
 - [hipster ipsum](https://hipsum.co/)
-- [keys generator](https://www.allkeysgenerator.com/)
+- [keys generator](https://randomkeygen.com/)
+- [react icons package](https://react-icons.github.io/react-icons/)
 - In client(frontend folder), Why styledWrappers folder is not containing index.js that exports its files like in components or pages folders?
   - Because a component or a page might import only 1 styledWrapper, while it usually imports many components. So, a better approach to not having many lines of import components, is to have an index.js file that imports all the other components.
   - So, instead of writing:
