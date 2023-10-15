@@ -5,14 +5,17 @@ import { Navbar, SidebarBig, SidebarSmall } from '../components';
 
 const DashboardContext = createContext();
 
-function DashboardLayout() {
+function DashboardLayout({ checkDefaultTheme }) {
   // temp
   const user = { name: 'john' };
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);
 
   const toggleDarkTheme = () => {
-    console.log('toggle theme');
+    const newDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newDarkTheme);
+    document.body.classList.toggle('dark-theme', newDarkTheme);
+    localStorage.setItem('darkTheme', newDarkTheme);
   };
 
   const toggleSidebar = () => {
