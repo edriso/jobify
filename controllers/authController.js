@@ -1,4 +1,4 @@
-import User from '../models/userModel.js';
+import User from '../models/User.js';
 import { BadRequestError, UnauthenticatedError } from '../errors/index.js';
 
 const register = async (req, res) => {
