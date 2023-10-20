@@ -11,12 +11,11 @@ const createJob = async (req, res) => {
   res.status(201).json({ msg: 'new job created', job });
 };
 
-const getJob = async () => {
+const getJob = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findById(id);
-  if (!job) {
-    throw new NotFoundError({ msg: `no job with id ${id}` });
-  }
+  if (!job) throw new NotFoundError({ msg: `no job with id ${id}` });
+
   res.status(200).json({ job });
 };
 
@@ -26,9 +25,7 @@ const updateJob = async (req, res) => {
     new: true,
     runValidators: true,
   });
-  if (!job) {
-    throw new NotFoundError({ msg: `no job with id ${id}` });
-  }
+  if (!job) throw new NotFoundError({ msg: `no job with id ${id}` });
 
   res.status(200).json({ msg: 'job updated', job });
 };
@@ -36,9 +33,8 @@ const updateJob = async (req, res) => {
 const deleteJob = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findByIdAndDelete(id);
-  if (!job) {
-    throw new NotFoundError({ msg: `no job with id ${id}` });
-  }
+  if (!job) throw new NotFoundError({ msg: `no job with id ${id}` });
+
   res.status(204).json({ msg: 'job deleted', job });
 };
 
