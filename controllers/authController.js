@@ -1,5 +1,8 @@
 import User from '../models/User.js';
-import { BadRequestError, UnauthenticatedError } from '../errors/index.js';
+import {
+  BadRequestError,
+  UnauthenticatedError,
+} from '../errors/customErrors.js';
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
