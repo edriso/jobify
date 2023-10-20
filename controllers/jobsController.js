@@ -1,28 +1,56 @@
-import crypto from 'crypto';
+import Job from '../models/Job.js';
+import { NotFoundError } from '../errors';
 
 const getAllJobs = async (req, res) => {
-  let jobs = [
-    { id: crypto.randomUUID(), company: 'google', position: 'backend' },
-    { id: crypto.randomUUID(), company: 'apple', position: 'frontend' },
-  ];
-
-  res.status(200).json(jobs);
+  const jobs = await Job.find({});
+  res.status(200).json({ jobs });
 };
 
 const createJob = async (req, res) => {
-  res.status(201).json('createJob');
+  const job = await Job.create(req.body);
+  res.status(201).json({ msg: 'new job created', job });
+};
+
+const getJob = async () => {
+  const { id } = req.params;
+  const job = await Job.findById(id);
+  if (!job) {
+    throw new NotFoundError({ msg: `no job with id ${id}` });
+  }
+  res.status(200).json({ job });
 };
 
 const updateJob = async (req, res) => {
-  res.status(200).json('updateJob');
+  const { id } = req.params;
+  const job = await Job.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!job) {
+    throw new NotFoundError({ msg: `no job with id ${id}` });
+  }
+
+  res.status(200).json({ msg: 'job updated', job });
 };
 
 const deleteJob = async (req, res) => {
-  res.status(204).json('deleteJob');
+  const { id } = req.params;
+  const job = await Job.findByIdAndDelete(id);
+  if (!job) {
+    throw new NotFoundError({ msg: `no job with id ${id}` });
+  }
+  res.status(204).json({ msg: 'job deleted', job });
 };
 
 const showStats = async (req, res) => {
   res.status(200).json('showStats');
 };
 
-export default { getAllJobs, createJob, updateJob, deleteJob, showStats };
+export default {
+  getAllJobs,
+  createJob,
+  getJob,
+  updateJob,
+  deleteJob,
+  showStats,
+};
