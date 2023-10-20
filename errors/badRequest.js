@@ -1,9 +1,8 @@
-import CustomAPIError from './customAPI.js';
-
-class BadRequestError extends CustomAPIError {
+class BadRequestError extends Error {
   constructor(message) {
     super(message);
     this.status = 400;
+    this.name = 'BadRequestError';
   }
 }
 

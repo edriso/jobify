@@ -1,9 +1,8 @@
-import CustomAPIError from './customAPI.js';
-
-class NotFoundError extends CustomAPIError {
+class NotFoundError extends Error {
   constructor(message) {
     super(message);
     this.status = 404;
+    this.name = 'NotFoundError';
   }
 }
 
