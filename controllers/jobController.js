@@ -1,5 +1,5 @@
 import Job from '../models/Job.js';
-import { NotFoundError } from '../errors';
+import { NotFoundError } from '../errors/index.js';
 
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({});

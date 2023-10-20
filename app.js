@@ -5,7 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 // routers
 import authRouter from './routes/authRoutes.js';
-import jobsRouter from './routes/jobsRoutes.js';
+import jobRouter from './routes/jobRoutes.js';
 // middleware
 import notFoundMiddleware from './middleware/notFound.js';
 import errorHandlerMiddleware from './middleware/errorHandler.js';
@@ -22,7 +22,7 @@ app.get('/api/v1', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', jobsRouter);
+app.use('/api/v1/jobs', jobRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
