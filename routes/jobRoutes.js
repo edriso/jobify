@@ -13,6 +13,6 @@ router
   .route('/:id')
   .get(jobController.getJob)
   .patch(validateJob, jobController.updateJob)
-  .delete(validateJob, jobController.deleteJob);
+  .delete(jobController.deleteJob);
 
 export default router;
