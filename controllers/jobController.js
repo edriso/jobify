@@ -1,4 +1,4 @@
-import Job from '../models/Job.js';
+import Job from '../models/jobModel.js';
 import { NotFoundError } from '../errors/customErrors.js';
 
 const getAllJobs = async (req, res) => {
@@ -35,7 +35,7 @@ const deleteJob = async (req, res) => {
   const job = await Job.findByIdAndDelete(id);
   if (!job) throw new NotFoundError({ msg: `no job with id ${id}` });
 
-  res.status(204).json({ msg: 'job deleted', job });
+  res.status(204).json({ msg: 'job deleted' });
 };
 
 const showStats = async (req, res) => {

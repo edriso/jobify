@@ -7,8 +7,8 @@ import morgan from 'morgan';
 import authRouter from './routes/authRoutes.js';
 import jobRouter from './routes/jobRoutes.js';
 // middleware
-import notFoundMiddleware from './middleware/notFound.js';
-import errorHandlerMiddleware from './middleware/errorHandler.js';
+import notFoundMiddleware from './middleware/notFoundMiddleware.js';
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 const app = express();
 
