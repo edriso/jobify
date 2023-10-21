@@ -23,7 +23,6 @@ const updateJob = async (req, res) => {
   const { id } = req.params;
   const job = await Job.findByIdAndUpdate(id, req.body, {
     new: true,
-    runValidators: true,
   });
   if (!job) throw new NotFoundError({ msg: `no job with id ${id}` });
 
