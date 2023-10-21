@@ -11,8 +11,7 @@ const createJob = async (req, res) => {
 };
 
 const getJob = async (req, res) => {
-  const job = await Job.findById(req.params.id);
-  res.status(200).json({ job });
+  res.status(200).json({ job: req.job });
 };
 
 const updateJob = async (req, res) => {
@@ -23,7 +22,7 @@ const updateJob = async (req, res) => {
 };
 
 const deleteJob = async (req, res) => {
-  const job = await Job.findByIdAndDelete(req.params.id);
+  await req.job.deleteOne();
   res.status(204).json({ message: 'job deleted' });
 };
 
