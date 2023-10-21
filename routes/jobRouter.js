@@ -1,7 +1,7 @@
 import express from 'express';
 import jobController from '../controllers/jobController.js';
 import {
-  validateIdParam,
+  validateJobIdAndCheckExistence,
   validateJobInput,
 } from '../middleware/validationMiddleware.js';
 
@@ -14,8 +14,11 @@ router
 router.route('/stats').get(jobController.showStats);
 router
   .route('/:id')
-  .get([validateIdParam], jobController.getJob)
-  .patch([validateIdParam, validateJobInput], jobController.updateJob)
-  .delete([validateIdParam], jobController.deleteJob);
+  .get([validateJobIdAndCheckExistence], jobController.getJob)
+  .patch(
+    [validateJobIdAndCheckExistence, validateJobInput],
+    jobController.updateJob
+  )
+  .delete([validateJobIdAndCheckExistence], jobController.deleteJob);
 
 export default router;
