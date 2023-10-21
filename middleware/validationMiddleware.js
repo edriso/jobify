@@ -1,4 +1,4 @@
-import { body, validationResult } from 'express-validator';
+import { body, param, validationResult } from 'express-validator';
 import { BadRequestError } from '../errors/customErrors.js';
 import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
 
@@ -39,4 +39,12 @@ export const validateJobInput = withValidationErrors([
   body('jobType')
     .isIn(Object.values(JOB_TYPE))
     .withMessage('invalid type value'),
+]);
+
+export const validateIdParam = withValidationErrors([
+  param('id')
+    .custom((value) => {
+      return true;
+    })
+    .withMessage('invalid MongoDB id'),
 ]);

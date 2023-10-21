@@ -4,8 +4,8 @@ dotenv.config();
 import express from 'express';
 import morgan from 'morgan';
 // routers
-import authRouter from './routes/authRoutes.js';
-import jobRouter from './routes/jobRoutes.js';
+import authRouter from './routes/authRouter.js';
+import jobRouter from './routes/jobRouter.js';
 // middleware
 import notFoundMiddleware from './middleware/notFoundMiddleware.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
