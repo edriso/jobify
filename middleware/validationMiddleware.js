@@ -2,6 +2,7 @@ import { body, param, validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 import { BadRequestError } from '../errors/customErrors.js';
 import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
+import User from '../models/userModel.js';
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -56,4 +57,23 @@ export const validateIdParam = withValidationErrors([
   param('id')
     .custom((value) => mongoose.Types.ObjectId.isValid(value))
     .withMessage('invalid MongoDB id'),
+]);
+
+export const validateRegisterInput = withValidationErrors([
+  body('name').notEmpty().withMessage('name is required'),
+  body('email')
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('invalid email format')
+    .custom(async (email) => {
+      const user = await User.findOne({ email });
+      if (user) throw new Error('email already exists');
+    }),
+  body('password')
+    .notEmpty()
+    .withMessage('password is required')
+    .isLength({ min: 8 })
+    .withMessage('password must be at least 8 characters long'),
+  body('location').notEmpty().withMessage('location is required'),
 ]);
