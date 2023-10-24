@@ -1,9 +1,6 @@
 import User from '../models/userModel.js';
-import {
-  BadRequestError,
-  UnauthenticatedError,
-} from '../errors/customErrors.js';
-import { hashPassword } from '../utils/passwordUtils.js';
+import { UnauthenticatedError } from '../errors/customErrors.js';
+import { comparePassword, hashPassword } from '../utils/passwordUtils.js';
 
 const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
@@ -14,35 +11,23 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    throw new BadRequestError('All values must be provided');
-  }
-
-  const user = await User.findOne({ email }).select('+password');
-
-  if (!user) {
-    throw new UnauthenticatedError('Invalid Credentials');
-  }
-
-  const isPasswordCorrect = await user.comparePassword(password);
-
-  if (!isPasswordCorrect) {
-    throw new UnauthenticatedError('Invalid Credentials');
-  }
-
-  const token = user.createJWT();
+  const user = await User.findOne({ email: req.body.email });
+  // if (!user) throw new UnauthenticatedError('Invalid Credentials');
+  // const isPasswordCorrect = await comparePassword(
+  //   req.body.password,
+  //   user.password
+  // );
+  // if (!isPasswordCorrect) throw new UnauthenticatedError('Invalid Credentials');
+  const isValidUser =
+    user && (await comparePassword(req.body.password, user.password));
+  if (!isValidUser) throw new UnauthenticatedError('Invalid Credentials');
 
   user.password = undefined;
-
-  res.status(200).json({
-    user,
-    token,
-  });
+  res.status(200).json({ user });
 };
 
 const updateUser = async (req, res) => {
-  res.send('updateUser');
+  res.json('updateUser');
 };
 
 export default { register, login, updateUser };
