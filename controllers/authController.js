@@ -3,31 +3,14 @@ import {
   BadRequestError,
   UnauthenticatedError,
 } from '../errors/customErrors.js';
+import { hashPassword } from '../utils/passwordUtils.js';
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
-
-  if (!name || !email || !password) {
-    throw new BadRequestError('Some values missing');
-  }
-
-  const userAlreadyExist = await User.findOne({ email });
-
-  if (userAlreadyExist) {
-    throw new BadRequestError('Email already in use');
-  }
-
-  const user = await User.create({ name, email, password });
-  const token = user.createJWT();
-
-  res.status(201).json({
-    user: {
-      name: user.name,
-      email: user.email,
-      location: user.location,
-    },
-    token,
-  });
+  const isFirstAccount = (await User.countDocuments()) === 0;
+  req.body.role = isFirstAccount ? 'admin' : 'user';
+  req.body.password = await hashPassword(req.body.password);
+  await User.create(req.body);
+  res.status(201).json({ message: 'user created' });
 };
 
 const login = async (req, res) => {
@@ -56,8 +39,6 @@ const login = async (req, res) => {
     user,
     token,
   });
-
-  console.log(user);
 };
 
 const updateUser = async (req, res) => {
