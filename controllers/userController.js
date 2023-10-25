@@ -8,10 +8,9 @@ const getCurrentUser = async (req, res) => {
 };
 
 const getApplicationStats = async (req, res) => {
-  const isAdmin = req.user.role === 'admin';
-  if (!isAdmin)
-    throw new UnauthorizedError('not authorized to access this route');
-  res.status(200).json({ message: 'getApplicationStats' });
+  const users = await User.countDocuments();
+  const jobs = await Job.countDocuments();
+  res.status(200).json({ users, jobs });
 };
 
 const updateUser = async (req, res) => {
