@@ -4,7 +4,7 @@ import { UnauthorizedError } from '../errors/customErrors.js';
 
 const getCurrentUser = async (req, res) => {
   const user = await User.findById(req.user.userId);
-  res.status(200).json({ user: user.hidePassword() });
+  res.status(200).json({ user: user.excludePassword() });
 };
 
 const getApplicationStats = async (req, res) => {
@@ -15,7 +15,8 @@ const getApplicationStats = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  res.status(200).json({ message: 'updateUser' });
+  await User.findByIdAndUpdate(req.user.userId, req.body, { new: true });
+  res.status(200).json({ message: 'user updated' });
 };
 
 export default {
