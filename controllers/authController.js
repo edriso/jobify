@@ -13,15 +13,15 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  // if (!user) throw new UnauthenticatedError('Invalid Credentials');
+  // if (!user) throw new UnauthenticatedError('invalid credentials');
   // const isPasswordCorrect = await comparePassword(
   //   req.body.password,
   //   user.password
   // );
-  // if (!isPasswordCorrect) throw new UnauthenticatedError('Invalid Credentials');
+  // if (!isPasswordCorrect) throw new UnauthenticatedError('invalid credentials');
   const isValidUser =
     user && (await comparePassword(req.body.password, user.password));
-  if (!isValidUser) throw new UnauthenticatedError('Invalid Credentials');
+  if (!isValidUser) throw new UnauthenticatedError('invalid credentials');
 
   const token = createJWT({ userId: user._id, role: user.role });
 
