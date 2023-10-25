@@ -7,20 +7,20 @@ const getCurrentUser = async (req, res) => {
   res.status(200).json({ user: user.excludePassword() });
 };
 
-const getApplicationStats = async (req, res) => {
-  const users = await User.countDocuments();
-  const jobs = await Job.countDocuments();
-  res.status(200).json({ users, jobs });
-};
-
 const updateUser = async (req, res) => {
   delete req.body.password;
   await User.findByIdAndUpdate(req.user.userId, req.body);
   res.status(200).json({ message: 'user updated' });
 };
 
+const getApplicationStats = async (req, res) => {
+  const users = await User.countDocuments();
+  const jobs = await Job.countDocuments();
+  res.status(200).json({ users, jobs });
+};
+
 export default {
   getCurrentUser,
-  getApplicationStats,
   updateUser,
+  getApplicationStats,
 };
