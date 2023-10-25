@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.methods.hidePassword = function () {
+  let obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
 const User = mongoose.model('User', userSchema);
 
 export default User;
