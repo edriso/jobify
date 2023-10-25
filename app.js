@@ -10,6 +10,7 @@ import jobRouter from './routes/jobRouter.js';
 // middleware
 import notFoundMiddleware from './middleware/notFoundMiddleware.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
+import { authenticateUser } from './middleware/authMiddleware.js';
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.get('/api/v1', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/jobs', jobRouter);
+app.use('/api/v1/jobs', authenticateUser, jobRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
