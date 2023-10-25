@@ -5,26 +5,56 @@ A job tracking MERN application.
 - Where user can register, login, and update account
 - Then user can create job applications, and keep track of them, and only that user who can see, or modify the job using JWT
 
-#### Technologies and packages I used
+### Getting Started with Jobify
+
+1. **Clone the Repository:**
+
+   Clone the Jobify repository to your local machine using the following command:
+
+   ```bash
+   git clone https://github.com/edriso/jobify.git
+   ```
+
+2. **Setup the Application:**
+
+   Navigate to the project directory and set up the application dependencies using the provided setup script:
+
+   ```bash
+   cd jobify
+   npm run setup
+   ```
+
+3. **Configure Environment Variables:**
+
+   Rename the `.env.example` file to `.env` and fill in the required variables according to your configuration.
+
+4. **Start the Application:**
+
+   Launch Jobify application by running the following command:
+
+   ```bash
+   npm start
+   ```
+
+Now, you have Jobify up and running on your local machine! Visit the specified localhost address in your browser to access the application.
+
+#### Technologies and Packages Used
 
 - Node.js, Express.js
 - MongoDB, Mongoose
 - React.js
 - styled-components
 - jsonwebtoken (JWT)
-- validator, to validate inputs like email
+- cookie-parser, to access cookies
+- express-validator, to make validation layers
 - bcryptjs, for hashing passwords
-- express-async-errors, for errors handling
+- express-async-errors, for async errors handling
 - concurrently, to run multiple commands concurrently
 - Connect client and server using Proxy - solves CORS problem -
 - axios
 - morgan
 
-<!-- #### To setup the project locally
-
-- Run -->
-
-##### Takeaways and useful resources
+#### Takeaways and Useful Resources
 
 - [favicon generator](https://favicon.io/)
 - [illustration images](https://undraw.co/)
