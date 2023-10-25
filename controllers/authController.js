@@ -31,11 +31,15 @@ const login = async (req, res) => {
     expires: new Date(Date.now() + oneDay), // similar to JWT_EXPIRES_IN but in milliseconds
     secure: process.env.NODE_ENV === 'production',
   });
-  res.status(200).json({ msg: 'user logged in' });
+  res.status(200).json({ message: 'user logged in' });
 };
 
-const updateUser = async (req, res) => {
-  res.json('updateUser');
+const logout = (req, res) => {
+  res.cookie('token', '', {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.status(200).json({ message: 'logout' });
 };
 
-export default { register, login, updateUser };
+export default { register, login, logout };

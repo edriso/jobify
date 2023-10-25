@@ -11,6 +11,6 @@ router
   .route('/register')
   .post([validateRegisterInput], authController.register);
 router.route('/login').post([validateLoginInput], authController.login);
-router.route('/updateUser').patch(authController.updateUser);
+router.route('/logout').get(authController.logout);
 
 export default router;
