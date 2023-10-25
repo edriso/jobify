@@ -27,15 +27,10 @@ const deleteJob = async (req, res) => {
   res.status(204).json({ message: 'job deleted' });
 };
 
-const showStats = async (req, res) => {
-  res.status(200).json('showStats');
-};
-
 export default {
   getAllJobs,
   createJob,
   getJob,
   updateJob,
   deleteJob,
-  showStats,
 };

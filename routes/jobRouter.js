@@ -12,7 +12,6 @@ router
   .route('/')
   .get(jobController.getAllJobs)
   .post([validateJobInput], jobController.createJob);
-router.route('/stats').get(jobController.showStats);
 router
   .route('/:id')
   .get([validateIdParam, CheckJobExistenceMiddleware], jobController.getJob)
