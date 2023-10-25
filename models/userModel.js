@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.methods.hidePassword = function () {
+userSchema.methods.excludePassword = function () {
   let obj = this.toObject();
   delete obj.password;
   return obj;
