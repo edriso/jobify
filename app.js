@@ -2,6 +2,7 @@ import 'express-async-errors';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 // routers
 import authRouter from './routes/authRouter.js';
@@ -12,10 +13,11 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 const app = express();
 
+app.use(cookieParser()); // to have access to cookies
+app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-app.use(express.json());
 
 app.get('/api/v1', (req, res) => {
   res.send('<h1>Jobify API!</h1>');
