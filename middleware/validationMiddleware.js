@@ -109,4 +109,5 @@ export const validateUpdateUserInput = withValidationErrors([
       }
     }),
   body('location').notEmpty().withMessage('location is required'),
+  body('role').not().exists().withMessage('role can not be changed'),
 ]);
