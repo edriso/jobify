@@ -1,6 +1,7 @@
 import User from '../models/userModel.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
 import { comparePassword, hashPassword } from '../utils/passwordUtils.js';
+import { createJWT } from '../utils/tokenUtils.js';
 
 const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
@@ -22,8 +23,15 @@ const login = async (req, res) => {
     user && (await comparePassword(req.body.password, user.password));
   if (!isValidUser) throw new UnauthenticatedError('Invalid Credentials');
 
-  user.password = undefined;
-  res.status(200).json({ user });
+  const token = createJWT({ userId: user._id, role: user.role });
+
+  const oneDay = 1000 * 60 * 60 * 24;
+  res.cookie('token', token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + oneDay), // similar to JWT_EXPIRES_IN but in milliseconds
+    secure: process.env.NODE_ENV === 'production',
+  });
+  res.status(200).json({ msg: 'user logged in' });
 };
 
 const updateUser = async (req, res) => {
