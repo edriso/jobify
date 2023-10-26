@@ -113,4 +113,6 @@ Now, you have Jobify up and running on your local machine! Visit the specified l
 
   4. **URL Rewriting and Routing**: Proxies can rewrite request URLs, enabling clean and organized routing on the frontend while handling complex backend routes behind the scenes.
 
-  Overall, using a proxy enhances security, simplifies development, and ensures smooth communication between frontend and backend components of a web application.
+  **Development vs. Production:**
+
+  It's important to note that this proxy configuration is primarily used during development. In a production environment, the frontend and backend are typically hosted on the same server, and the need for a proxy is usually eliminated. The proxy helps simplify development, making it easier to work with different ports or domains, while in production, the frontend and backend can coexist on the same server.
