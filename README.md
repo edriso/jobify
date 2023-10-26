@@ -30,10 +30,10 @@ A job tracking MERN application.
 
 4. **Start the Application:**
 
-   Launch Jobify application by running the following command:
+   Launch Jobify application on development by running the following command:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
 Now, you have Jobify up and running on your local machine! Visit the specified localhost address in your browser to access the application.
@@ -74,3 +74,43 @@ Now, you have Jobify up and running on your local machine! Visit the specified l
     import { component1, component2, component3 } from './components';
     ```
 - In mongoose, when using the pre hook for saving user for example; be aware when updating the user as using findOneAndUpdate will NOT trigger that hook, instead use user.save() for updating to trigger it.
+- **Proxy Configuration in `vite.config.js` File:**
+
+  ```javascript
+  export default defineConfig({
+    plugins: [react()],
+    server: {
+      proxy: {
+        '/api': {
+          target: `http://localhost:${process.env.PORT || 5000}/api/v1`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
+  });
+  ```
+
+  A **proxy** acts as an intermediary between a client (e.g., a frontend application) and a server (e.g., a backend API). In this configuration, we are using a proxy in the `vite.config.js` file to reroute requests made to paths starting with `/api` to a different server address. Specifically:
+
+  - **`'/api'`**: Any request path starting with `/api` will be intercepted.
+
+  - **`target`**: Requests matching the `/api` prefix are sent to `http://localhost:${process.env.PORT || 5000}/api/v1`, which is the target server's address.
+
+  - **`changeOrigin: true`**: This property modifies the request's `Origin` header, ensuring the target server recognizes the request's origin correctly.
+
+  - **`rewrite: (path) => path.replace(/^\/api/, '')`**: Rewrites the request path, removing the `/api` prefix before forwarding the request to the target server.
+
+  **Why Use a Proxy:**
+
+  Proxies are useful for several reasons:
+
+  1. **CORS (Cross-Origin Resource Sharing) Issues**: Proxies can resolve CORS problems by allowing requests from different origins to access resources on the server.
+
+  2. **Security**: Proxies can protect sensitive backend APIs by hiding their direct URLs from the client-side code, adding an extra layer of security.
+
+  3. **Simplifying Development**: During development, frontend and backend might run on different ports or domains. A proxy allows developers to work seamlessly without worrying about CORS restrictions.
+
+  4. **URL Rewriting and Routing**: Proxies can rewrite request URLs, enabling clean and organized routing on the frontend while handling complex backend routes behind the scenes.
+
+  Overall, using a proxy enhances security, simplifies development, and ensures smooth communication between frontend and backend components of a web application.
