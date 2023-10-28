@@ -1,13 +1,23 @@
 import { createContext, useContext, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, redirect, useLoaderData } from 'react-router-dom';
 import Wrapper from '../assets/styledWrappers/Dashboard';
 import { Navbar, SidebarBig, SidebarSmall } from '../components';
+import apiHandler from '../utils/apiHandler';
+
+export const loader = async () => {
+  try {
+    const { data } = await apiHandler('/users/current-user');
+    return data;
+  } catch (error) {
+    return redirect('/');
+  }
+};
 
 const DashboardContext = createContext();
 
 function DashboardLayout({ checkDefaultTheme }) {
-  // temp
-  const user = { name: 'john' };
+  const { user } = useLoaderData();
+
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);
 
@@ -44,7 +54,7 @@ function DashboardLayout({ checkDefaultTheme }) {
           <div>
             <Navbar />
             <div className="dashboard-page">
-              <Outlet />
+              <Outlet context={{ user }} />
             </div>
           </div>
         </main>
