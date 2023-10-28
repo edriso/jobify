@@ -1,13 +1,12 @@
-import { Form, redirect, Link, useNavigation } from 'react-router-dom';
-import { Logo, FormRow } from '../components';
+import { Form, redirect, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Logo, FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/styledWrappers/RegisterAndLoginPage';
 import apiHandler from '../utils/apiHandler';
-import { toast } from 'react-toastify';
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-
   try {
     await apiHandler.post('/auth/register', data);
     toast.success('Registration Successful');
@@ -19,9 +18,6 @@ export const action = async ({ request }) => {
 };
 
 function Register() {
-  const navigate = useNavigation();
-  const isSubmitting = navigate.state === 'submitting';
-
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -37,9 +33,7 @@ function Register() {
         <FormRow type="text" name="location" />
         <FormRow type="email" name="email" />
         <FormRow type="password" name="password" />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
+        <SubmitBtn />
         <p>
           Already a member?
           <Link to="/login" className="member-btn">
