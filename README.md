@@ -44,6 +44,7 @@ Now, you have Jobify up and running on your local machine! Visit the specified l
 - MongoDB, Mongoose
 - React.js
 - styled-components
+- react-toastify
 - jsonwebtoken (JWT)
 - cookie-parser, to access cookies
 - express-validator, to make validation layers
