@@ -14,7 +14,6 @@ export const action = async ({ request }) => {
     return redirect('/login');
   } catch (error) {
     toast.error(error?.response?.data?.message);
-    console.log(error);
     return error;
   }
 };
