@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
-import { Outlet, redirect, useLoaderData } from 'react-router-dom';
+import { Outlet, redirect, useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Wrapper from '../assets/styledWrappers/Dashboard';
 import { Navbar, SidebarBig, SidebarSmall } from '../components';
 import apiHandler from '../utils/apiHandler';
@@ -17,7 +18,7 @@ const DashboardContext = createContext();
 
 function DashboardLayout({ checkDefaultTheme }) {
   const { user } = useLoaderData();
-
+  const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme);
 
@@ -32,8 +33,14 @@ function DashboardLayout({ checkDefaultTheme }) {
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = () => {
-    console.log('logout user');
+  const logoutUser = async () => {
+    try {
+      await apiHandler.get('/auth/logout');
+      navigate('/');
+      toast.success('Logged out');
+    } catch (error) {
+      toast.error('Something went wrong!');
+    }
   };
 
   return (
