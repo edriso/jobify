@@ -21,8 +21,11 @@ function Landing() {
             man braid disrupt. Occupy chia tofu vaporware dreamcatcher try-hard.
             Pinterest vinyl kogi bodega boys.
           </p>
-          <Link to="/register" className="btn btn-hero">
-            Login/Register
+          <Link to="/register" className="btn register-link">
+            Register
+          </Link>
+          <Link to="/login" className="btn ">
+            Login / Demo User
           </Link>
         </div>
 
