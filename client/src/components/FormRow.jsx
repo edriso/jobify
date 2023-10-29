@@ -1,10 +1,10 @@
 function FormRow({
   type = 'text',
   name,
-  value,
-  handleChange,
-  labelText = name,
+  defaultValue,
   notRequired,
+  labelText = name,
+  onChange,
 }) {
   return (
     <div className="form-row">
@@ -13,12 +13,12 @@ function FormRow({
       </label>
       <input
         type={type}
-        value={value}
-        name={name}
-        onChange={handleChange}
-        className="form-input"
         id={name}
+        name={name}
+        className="form-input"
+        defaultValue={defaultValue}
         required={!notRequired}
+        onChange={onChange}
       />
     </div>
   );
