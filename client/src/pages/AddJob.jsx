@@ -1,23 +1,33 @@
 import { Form, redirect, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
-import { FormRow, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
 import apiHandler from '../utils/apiHandler';
-import FormRowSelect from '../components/FormRowSelect';
+
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await apiHandler.post('/jobs', data);
+    toast.success('Job added Successfully');
+    return redirect('/dashboard/all-jobs');
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    return error;
+  }
+};
 
 function AddJob() {
   const { user } = useOutletContext();
-
   return (
     <Wrapper>
       <Form method="post" className="form">
         <h4 className="form-title">add job</h4>
         <div className="form-center">
-          <FormRow type="text" name="position" />
-          <FormRow type="text" name="company" />
+          <FormRow name="position" />
+          <FormRow name="company" />
           <FormRow
-            type="text"
             labelText="job location"
             name="jobLocation"
             defaultValue={user.location}
