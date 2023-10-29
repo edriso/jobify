@@ -1,9 +1,10 @@
 import { Form, redirect, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
-import apiHandler from '../utils/apiHandler';
 import { FormRow, SubmitBtn } from '../components';
 import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
+import apiHandler from '../utils/apiHandler';
+import FormRowSelect from '../components/FormRowSelect';
 
 function AddJob() {
   const { user } = useOutletContext();
@@ -21,7 +22,18 @@ function AddJob() {
             name="jobLocation"
             defaultValue={user.location}
           />
-
+          <FormRowSelect
+            name="jobStatus"
+            labelText="job status"
+            defaultValue={JOB_STATUS.PENDING}
+            list={Object.values(JOB_STATUS)}
+          />
+          <FormRowSelect
+            name="jobType"
+            labelText="job type"
+            defaultValue={JOB_TYPE.FULL_TIME}
+            list={Object.values(JOB_TYPE)}
+          />
           <SubmitBtn formBtn />
         </div>
       </Form>
