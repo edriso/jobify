@@ -4,7 +4,7 @@ function FormRow({
   value,
   handleChange,
   labelText = name,
-  optional,
+  notRequired,
 }) {
   return (
     <div className="form-row">
@@ -18,7 +18,7 @@ function FormRow({
         onChange={handleChange}
         className="form-input"
         id={name}
-        required={optional ? false : true}
+        required={!notRequired}
       />
     </div>
   );

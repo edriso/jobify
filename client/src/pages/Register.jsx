@@ -35,7 +35,7 @@ function Register() {
           type="text"
           name="lastName"
           labelText="last name *"
-          optional={true}
+          notRequired
         />
         <FormRow type="text" name="location" />
         <FormRow type="email" name="email" />
