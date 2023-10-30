@@ -11,6 +11,8 @@ import {
   AllJobs,
   Profile,
   Admin,
+  EditJob,
+  DeleteJob,
 } from './pages';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             element: <Admin />,
+          },
+          {
+            path: 'edit-job/:id',
+            element: <EditJob />,
+          },
+          {
+            path: 'delete-job/:id',
+            element: <DeleteJob />,
           },
         ],
       },
