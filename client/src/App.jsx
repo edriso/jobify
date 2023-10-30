@@ -12,7 +12,6 @@ import {
   Profile,
   Admin,
   EditJob,
-  DeleteJob,
 } from './pages';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
 import { loader as AllJobsLoader } from './pages/AllJobs';
@@ -85,7 +84,6 @@ const router = createBrowserRouter([
           },
           {
             path: 'delete-job/:id',
-            element: <DeleteJob />,
             action: DeleteJobAction,
           },
         ],
