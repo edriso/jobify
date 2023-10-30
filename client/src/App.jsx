@@ -14,11 +14,14 @@ import {
   EditJob,
   DeleteJob,
 } from './pages';
+import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { loader as AllJobsLoader } from './pages/AllJobs';
+import { loader as editJobLoader } from './pages/EditJob';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { action as addJobAction } from './pages/AddJob';
-import { loader as dashboardLoader } from './pages/DashboardLayout';
-import { loader as AllJobsLoader } from './pages/AllJobs';
+import { action as editJobAction } from './pages/EditJob';
+import { action as DeleteJobAction } from './pages/DeleteJob';
 
 const checkDefaultTheme = () => {
   const isDarkThemeEnabled = localStorage.getItem('darkTheme') === 'true';
@@ -77,10 +80,13 @@ const router = createBrowserRouter([
           {
             path: 'edit-job/:id',
             element: <EditJob />,
+            loader: editJobLoader,
+            action: editJobAction,
           },
           {
             path: 'delete-job/:id',
             element: <DeleteJob />,
+            action: DeleteJobAction,
           },
         ],
       },
