@@ -7,6 +7,7 @@ import JobInfo from './JobInfo';
 day.extend(advancedFormat);
 
 function Job({
+  _id,
   company,
   position,
   jobLocation,
@@ -15,7 +16,6 @@ function Job({
   createdAt,
 }) {
   const date = day(createdAt).format('MMM Do, YYYY');
-  console.log(date);
   return (
     <Wrapper>
       <header>
@@ -35,8 +35,10 @@ function Job({
         </div>
 
         <footer className="actions">
-          <Link className="btn edit-btn">Edit</Link>
-          <Form>
+          <Link to={`../edit-job/${_id}`} className="btn edit-btn">
+            Edit
+          </Link>
+          <Form method="post" action={`../delete-job/${_id}`}>
             <button type="submit" className="btn delete-btn">
               Delete
             </button>
