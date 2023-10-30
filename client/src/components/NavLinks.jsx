@@ -8,6 +8,7 @@ function NavLinks({ isBigSidebar }) {
   return (
     <div className="nav-links">
       {links.map((link) => {
+        if (link.path === 'admin' && user.role !== 'admin') return;
         return (
           <NavLink
             key={link.text}
