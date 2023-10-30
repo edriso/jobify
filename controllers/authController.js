@@ -25,10 +25,11 @@ const login = async (req, res) => {
 
   const token = createJWT({ userId: user._id, role: user.role });
 
-  const oneDay = 1000 * 60 * 60 * 24;
   res.cookie('token', token, {
     httpOnly: true,
-    expires: new Date(Date.now() + oneDay), // similar to JWT_EXPIRES_IN but in milliseconds
+    expires: new Date(
+      Date.now() + parseInt(process.env.JWT_AND_COOKIE_LIFESPAN_IN_MILLISECONDS)
+    ),
     secure: process.env.NODE_ENV === 'production',
   });
   res.status(200).json({ message: 'user logged in' });
