@@ -5,3 +5,5 @@ export { default as SubmitBtn } from './SubmitBtn';
 export { default as SidebarBig } from './SidebarBig';
 export { default as SidebarSmall } from './SidebarSmall';
 export { default as Navbar } from './Navbar';
+export { default as JobsContainer } from './JobsContainer';
+export { default as SearchContainer } from './SearchContainer';
