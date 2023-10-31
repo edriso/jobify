@@ -29,7 +29,7 @@ const Wrapper = styled.article`
   .icon {
     width: 70px;
     height: 60px;
-    background: ${(props) => props.bcg};
+    background: ${(props) => props.bg};
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
