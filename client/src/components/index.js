@@ -7,4 +7,4 @@ export { default as SidebarSmall } from './SidebarSmall';
 export { default as Navbar } from './Navbar';
 export { default as JobsContainer } from './JobsContainer';
 export { default as SearchContainer } from './SearchContainer';
-export { default as Job } from './Job';
+export { default as StatItem } from './StatItem';
