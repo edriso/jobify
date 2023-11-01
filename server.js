@@ -1,3 +1,5 @@
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import 'express-async-errors';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -15,7 +17,9 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
 
 const app = express();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
+app.use(express.static(path.resolve(__dirname, './public')));
 app.use(cookieParser()); // to be able to access cookies
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
