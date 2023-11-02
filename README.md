@@ -162,3 +162,5 @@ Now, you have Jobify up and running on your local machine! Visit the specified l
 
     In summary, use `value` for controlled components where React manages the input state, and use `defaultValue` for uncontrolled components where the DOM handles the input state. Choose the appropriate one based on your specific use case and whether you need to handle the input state through React or directly manipulate the DOM.
     </details>
+
+  - When sending a file to your server, such as when uploading a user avatar, ensure to include the `encType="multipart/form-data"` property in your form element. This is crucial for allowing the correct transmission of files from the client to the server. It indicates that the form will be used to upload binary data, such as files. Keep in mind that files are not sent as JSON data but as binary data, and `multipart/form-data` is the appropriate content type for handling file uploads.
