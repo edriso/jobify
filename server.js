@@ -5,6 +5,7 @@ import 'express-async-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import cloudinary from 'cloudinary';
 import connectDB from './db/connect.js';
 // routers
 import authRouter from './routes/authRouter.js';
@@ -14,6 +15,12 @@ import userRouter from './routes/userRouter.js';
 import notFoundMiddleware from './middleware/notFoundMiddleware.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
