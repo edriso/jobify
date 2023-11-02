@@ -1,8 +1,7 @@
+import 'dotenv/config';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import 'express-async-errors';
-import * as dotenv from 'dotenv';
-dotenv.config();
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
