@@ -1,12 +1,27 @@
-import { useNavigation, Form, useOutletContext } from 'react-router-dom';
+import { Form, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 import apiHandler from '../utils/apiHandler';
 
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const file = formData.get('avatar');
+  if (file && file.size > 500000) {
+    toast.error('Image size too large');
+    return null;
+  }
+  try {
+    await apiHandler.patch('/users/update-user', formData);
+    toast.success('Profile updated successfully');
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+  return null;
+};
+
 function Profile() {
   const { user } = useOutletContext();
-
   return (
     <Wrapper>
       <Form method="post" className="form" encType="multipart/form-data">
