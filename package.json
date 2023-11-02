@@ -24,6 +24,7 @@
   "homepage": "https://github.com/edriso/jobify#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.0",
     "concurrently": "^8.2.1",
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.10",
