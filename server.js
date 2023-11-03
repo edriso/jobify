@@ -5,7 +5,7 @@ import 'express-async-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import cloudinary from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import connectDB from './db/connect.js';
 // routers
 import authRouter from './routes/authRouter.js';
