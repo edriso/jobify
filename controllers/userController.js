@@ -1,6 +1,7 @@
+import { promises as fs } from 'fs';
 import User from '../models/userModel.js';
 import Job from '../models/jobModel.js';
-import { UnauthorizedError } from '../errors/customErrors.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 const getCurrentUser = async (req, res) => {
   const user = await User.findById(req.user.userId);
@@ -8,8 +9,23 @@ const getCurrentUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  delete req.body.password;
-  await User.findByIdAndUpdate(req.user.userId, req.body);
+  const updatedUser = { ...req.body };
+  delete updatedUser.password;
+  if (req.file) {
+    const response = await cloudinary.uploader.upload(req.file.path);
+    await fs.unlink(req.file.path); // deletes the local img
+    updatedUser.avatar = response.secure_url;
+    updatedUser.avatarPublicId = response.public_id;
+  }
+
+  const userBeforeUpdate = await User.findByIdAndUpdate(
+    req.user.userId,
+    updatedUser
+  );
+  // deleting old avatar on cloudinary if exists
+  if (req.file && userBeforeUpdate.avatarPublicId) {
+    await cloudinary.uploader.destroy(userBeforeUpdate.avatarPublicId);
+  }
   res.status(200).json({ message: 'user updated' });
 };
 
