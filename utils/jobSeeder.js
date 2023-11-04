@@ -5,9 +5,9 @@ import { readFile } from 'fs/promises';
 import connectDB from '../db/connect.js';
 import Job from '../models/jobModel.js';
 
-const __filename = fileURLToPath(import.meta.url);
+const __dirname = fileURLToPath(import.meta.url);
 const jsonFilePath = path.resolve(
-  path.dirname(__filename),
+  path.dirname(__dirname),
   '../db/jobsMockData.json'
 );
 
