@@ -21,8 +21,8 @@ function Login() {
   const navigate = useNavigate();
   const loginDemoUser = async () => {
     const data = {
-      email: 'yamada@example.com',
-      password: 'pass1234',
+      email: import.meta.env.VITE_DEMO_USER_EMAIL,
+      password: import.meta.env.VITE_DEMO_USER_PASSWORD,
     };
     try {
       await apiHandler.post('/auth/login', data);
