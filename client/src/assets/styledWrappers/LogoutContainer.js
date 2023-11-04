@@ -9,9 +9,10 @@ const Wrapper = styled.div`
     gap: 0 0.5rem;
   }
   .img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
+    border: 1px solid var(--white);
   }
   .dropdown {
     position: absolute;
