@@ -5,22 +5,28 @@ import {
   validateJobInput,
 } from '../middleware/validationMiddleware.js';
 import CheckJobExistenceMiddleware from '../middleware/CheckJobExistenceMiddleware.js';
+import { restrictDemoUserAccess } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 router
   .route('/')
   .get(jobController.getAllJobs)
-  .post([validateJobInput], jobController.createJob);
+  .post([restrictDemoUserAccess, validateJobInput], jobController.createJob);
 router
   .route('/:id')
   .get([validateIdParam, CheckJobExistenceMiddleware], jobController.getJob)
   .patch(
-    [validateIdParam, CheckJobExistenceMiddleware, validateJobInput],
+    [
+      restrictDemoUserAccess,
+      validateIdParam,
+      CheckJobExistenceMiddleware,
+      validateJobInput,
+    ],
     jobController.updateJob
   )
   .delete(
-    [validateIdParam, CheckJobExistenceMiddleware],
+    [restrictDemoUserAccess, validateIdParam, CheckJobExistenceMiddleware],
     jobController.deleteJob
   );
 
