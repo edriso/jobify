@@ -1,4 +1,4 @@
-import { Link, redirect, Form } from 'react-router-dom';
+import { Link, redirect, Form, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Wrapper from '../assets/styledWrappers/RegisterAndLoginPage';
 import { FormRow, Logo, SubmitBtn } from '../components';
@@ -18,6 +18,21 @@ export const action = async ({ request }) => {
 };
 
 function Login() {
+  const navigate = useNavigate();
+  const loginDemoUser = async () => {
+    const data = {
+      email: 'yamada@example.com',
+      password: 'pass1234',
+    };
+    try {
+      await apiHandler.post('/auth/login', data);
+      toast.success("Success! You're now logged in and ready to roll");
+      navigate('/dashboard');
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -26,7 +41,7 @@ function Login() {
         <FormRow type="email" name="email" />
         <FormRow type="password" name="password" />
         <SubmitBtn />
-        <button type="button" className="btn btn-block">
+        <button type="button" className="btn btn-block" onClick={loginDemoUser}>
           explore the app
         </button>
         <p>
