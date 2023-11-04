@@ -1,4 +1,5 @@
 import {
+  BadRequestError,
   UnauthenticatedError,
   UnauthorizedError,
 } from '../errors/customErrors.js';
@@ -10,7 +11,8 @@ export const authenticateUser = (req, res, next) => {
 
   try {
     const { userId, role } = verifyJWT(token);
-    req.user = { userId, role };
+    const isTestUser = userId === process.env.DEMO_USER_ID;
+    req.user = { userId, role, isTestUser };
     next();
   } catch (error) {
     throw new UnauthenticatedError('invalid authentication');
@@ -24,4 +26,12 @@ export const authorizePermissions = (...roles) => {
     }
     next();
   };
+};
+
+export const restrictDemoUserAccess = (req, res, next) => {
+  if (req.user.isTestUser)
+    throw new BadRequestError(
+      'Read-only mode. Demo User cannot perform write operations.'
+    );
+  next();
 };
