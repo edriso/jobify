@@ -1,4 +1,6 @@
+import mongoose from 'mongoose';
 import Job from '../models/jobModel.js';
+import dayjs from 'dayjs';
 
 const getAllJobs = async (req, res) => {
   const jobs = await Job.find({ createdBy: req.user.userId });
@@ -27,10 +29,36 @@ const deleteJob = async (req, res) => {
   res.status(204).json({ message: 'job deleted' });
 };
 
+const showStats = async (req, res) => {
+  const defaultStats = {
+    pending: 22,
+    interview: 11,
+    declined: 4,
+  };
+
+  let monthlyApplications = [
+    {
+      date: 'May 23',
+      count: 12,
+    },
+    {
+      date: 'Jun 23',
+      count: 12,
+    },
+    {
+      date: 'Jul 23',
+      count: 12,
+    },
+  ];
+
+  res.status(200).json({ defaultStats, monthlyApplications });
+};
+
 export default {
   getAllJobs,
   createJob,
   getJob,
   updateJob,
   deleteJob,
+  showStats,
 };
