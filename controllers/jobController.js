@@ -3,7 +3,34 @@ import Job from '../models/jobModel.js';
 import dayjs from 'dayjs';
 
 const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({ createdBy: req.user.userId });
+  const { search, jobStatus, jobType, sort } = req.query;
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+  const sortOptions = {
+    newest: '-createdAt',
+    oldest: 'createdAt',
+    'a-z': 'position',
+    'z-a': '-position',
+  };
+  const sortKey = sortOptions[sort] || sortOptions.newest;
+
+  if (search) {
+    queryObject.$or = [
+      { position: { $regex: search, $options: 'i' } },
+      { company: { $regex: search, $options: 'i' } },
+    ];
+  }
+
+  if (jobStatus && jobStatus !== 'all') {
+    queryObject.jobStatus = jobStatus.toLowerCase();
+  }
+
+  if (jobType && jobType !== 'all') {
+    queryObject.jobType = jobType.toLowerCase();
+  }
+
+  const jobs = await Job.find(queryObject).sort(sortKey);
   res.status(200).json({ jobs });
 };
 
