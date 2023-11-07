@@ -18,7 +18,7 @@ function Stats() {
     <>
       <StatsContainer defaultStats={defaultStats} />
       {monthlyApplications.length && (
-        <ChartsContainer monthlyApplications={monthlyApplications} />
+        <ChartsContainer data={monthlyApplications} />
       )}
     </>
   );
