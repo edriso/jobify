@@ -4,6 +4,17 @@ import { useAllJobsContext } from '../pages/AllJobs';
 import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 
+const debounce = (onChange) => {
+  let timeout;
+  return (e) => {
+    const form = e.currentTarget.form;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      onChange(form);
+    }, 2000);
+  };
+};
+
 function SearchContainer() {
   const {
     searchValues: { search, jobStatus, jobType, sort },
@@ -16,12 +27,11 @@ function SearchContainer() {
         <h5 className="form-title">Search form</h5>
         <div className="form-center">
           <FormRow
+            labelText="Search for position or company"
             type="search"
             name="search"
-            labelText="Search for position or company"
-            notRequired
             defaultValue={search}
-            onChange={(e) => submit(e.currentTarget.form)}
+            onChange={debounce((form) => submit(form))}
           />
           <FormRowSelect
             labelText="job status"
