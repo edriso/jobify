@@ -14,6 +14,7 @@ function SearchContainer() {
             type="search"
             name="search"
             labelText="Search for position or company"
+            notRequired
           />
           <FormRowSelect
             labelText="job status"
