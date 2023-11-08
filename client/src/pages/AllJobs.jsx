@@ -8,9 +8,14 @@ import apiHandler from '../utils/apiHandler';
  * the browser defaults to a 'get' request to the same URL
  * and input values are then provided as query parameters
  */
-export const loader = async () => {
+export const loader = async ({ request }) => {
   try {
-    const { data } = await apiHandler.get('/jobs');
+    const params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries(),
+    ]);
+    const { data } = await apiHandler.get('/jobs', {
+      params,
+    });
     return { data };
   } catch (error) {
     toast.error(error?.response?.data?.message);
