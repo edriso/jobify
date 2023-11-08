@@ -30,8 +30,19 @@ const getAllJobs = async (req, res) => {
     queryObject.jobType = jobType.toLowerCase();
   }
 
-  const jobs = await Job.find(queryObject).sort(sortKey);
-  res.status(200).json({ jobs });
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skipBy = (page - 1) * limit;
+
+  const jobs = await Job.find(queryObject)
+    .sort(sortKey)
+    .skip(skipBy)
+    .limit(limit);
+
+  const totalJobs = await Job.countDocuments(queryObject);
+  const numOfPages = Math.ceil(totalJobs / limit);
+
+  res.status(200).json({ totalJobs, numOfPages, currentPage: page, jobs });
 };
 
 const createJob = async (req, res) => {
