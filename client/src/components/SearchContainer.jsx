@@ -5,6 +5,11 @@ import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 
 function SearchContainer() {
+  const {
+    searchValues: { search, jobStatus, jobType, sort },
+  } = useAllJobsContext();
+  const submit = useSubmit();
+
   return (
     <Wrapper>
       <Form className="form">
@@ -15,30 +20,36 @@ function SearchContainer() {
             name="search"
             labelText="Search for position or company"
             notRequired
+            defaultValue={search}
+            onChange={(e) => submit(e.currentTarget.form)}
           />
           <FormRowSelect
             labelText="job status"
             name="jobStatus"
             list={['all', ...Object.values(JOB_STATUS)]}
-            defaultValue="all"
+            defaultValue={jobStatus}
+            onChange={(e) => submit(e.currentTarget.form)}
           />
           <FormRowSelect
             labelText="job type"
             name="jobType"
             list={['all', ...Object.values(JOB_TYPE)]}
-            defaultValue="all"
+            defaultValue={jobType}
+            onChange={(e) => submit(e.currentTarget.form)}
           />
           <FormRowSelect
             labelText="sort"
             name="sort"
-            defaultValue="newest"
+            defaultValue={sort}
             list={Object.values(JOB_SORT_BY)}
+            onChange={(e) => submit(e.currentTarget.form)}
           />
-          <Link to="/dashboard/all-jobs" className="btn form-btn delete-btn">
+          <Link
+            to={window.location.pathname}
+            className="btn form-btn delete-btn"
+          >
             Reset search values
           </Link>
-          {/* TEMP */}
-          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>
