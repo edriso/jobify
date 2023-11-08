@@ -4,6 +4,10 @@ import { toast } from 'react-toastify';
 import { JobsContainer, SearchContainer } from '../components';
 import apiHandler from '../utils/apiHandler';
 
+/* In the SearchContainer, if no 'post' method is specified in the form
+ * the browser defaults to a 'get' request to the same URL
+ * and input values are then provided as query parameters
+ */
 export const loader = async () => {
   try {
     const { data } = await apiHandler.get('/jobs');
@@ -15,6 +19,7 @@ export const loader = async () => {
 };
 
 const AllJobsContext = createContext();
+
 function AllJobs() {
   const { data } = useLoaderData();
   return (
