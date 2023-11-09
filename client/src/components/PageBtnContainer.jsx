@@ -21,6 +21,7 @@ function PageBtnContainer() {
 
   return (
     <Wrapper>
+      {/* {currentPage > 1 && ( */}
       <button
         className="btn prev-btn"
         onClick={() => {
@@ -31,6 +32,7 @@ function PageBtnContainer() {
         <HiChevronDoubleLeft />
         prev
       </button>
+      {/* )} */}
 
       <div className="btn-container">
         {pagination.map((pageNum) => {
@@ -48,6 +50,7 @@ function PageBtnContainer() {
         })}
       </div>
 
+      {/* {currentPage < numOfPages && ( */}
       <button
         className="btn next-btn"
         onClick={() => {
@@ -58,6 +61,7 @@ function PageBtnContainer() {
         next
         <HiChevronDoubleRight />
       </button>
+      {/* )} */}
     </Wrapper>
   );
 }
