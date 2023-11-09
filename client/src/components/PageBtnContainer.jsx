@@ -4,6 +4,8 @@ import Wrapper from '../assets/styledWrappers/PageBtnContainer';
 import { useAllJobsContext } from '../pages/AllJobs';
 
 function PageBtnContainer() {
+  const { search, pathname } = useLocation();
+  const navigate = useNavigate();
   const {
     data: { numOfPages, currentPage },
   } = useAllJobsContext();
@@ -12,12 +14,20 @@ function PageBtnContainer() {
     (_, index) => index + 1
   );
   const handlePageNumber = (pageNumber) => {
-    console.log(pageNumber);
+    const searchParams = new URLSearchParams(search);
+    searchParams.set('page', pageNumber);
+    navigate(`${pathname}?${searchParams.toString()}`);
   };
 
   return (
     <Wrapper>
-      <button className="btn prev-btn">
+      <button
+        className="btn prev-btn"
+        onClick={() => {
+          let prevPage = currentPage - 1;
+          handlePageNumber(prevPage < 1 ? numOfPages : prevPage);
+        }}
+      >
         <HiChevronDoubleLeft />
         prev
       </button>
@@ -38,7 +48,13 @@ function PageBtnContainer() {
         })}
       </div>
 
-      <button className="btn next-btn">
+      <button
+        className="btn next-btn"
+        onClick={() => {
+          let nextPage = currentPage + 1;
+          handlePageNumber(nextPage > numOfPages ? 1 : nextPage);
+        }}
+      >
         next
         <HiChevronDoubleRight />
       </button>
