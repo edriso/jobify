@@ -6,17 +6,99 @@ import { useAllJobsContext } from '../pages/AllJobs';
 function PageBtnContainer() {
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
+
   const {
     data: { numOfPages, currentPage },
   } = useAllJobsContext();
+
   const pagination = Array.from(
     { length: numOfPages },
     (_, index) => index + 1
   );
+
   const handlePageNumber = (pageNumber) => {
     const searchParams = new URLSearchParams(search);
     searchParams.set('page', pageNumber);
     navigate(`${pathname}?${searchParams.toString()}`);
+  };
+
+  const addPaginationBtn = ({ pageNumber, activeClass }) => {
+    return (
+      <button
+        key={pageNumber}
+        className={`btn page-btn ${activeClass ? 'active' : ''}`}
+        onClick={() => handlePageNumber(pageNumber)}
+      >
+        {pageNumber}
+      </button>
+    );
+  };
+
+  const renderPaginationBtns = () => {
+    const paginationBtns = [];
+
+    // first page
+    paginationBtns.push(
+      addPaginationBtn({ pageNumber: 1, activeClass: currentPage === 1 })
+    );
+
+    // dots
+    if (currentPage > 3) {
+      paginationBtns.push(
+        <span className="page-btn dots" key="dots-1">
+          ...
+        </span>
+      );
+    }
+
+    // 1 page before current page
+    if (currentPage !== 1 && currentPage !== 2) {
+      paginationBtns.push(
+        addPaginationBtn({
+          pageNumber: currentPage - 1,
+          activeClass: false,
+        })
+      );
+    }
+
+    // current page
+    if (currentPage !== 1 && currentPage !== numOfPages) {
+      paginationBtns.push(
+        addPaginationBtn({
+          pageNumber: currentPage,
+          activeClass: true,
+        })
+      );
+    }
+
+    // 1 page after current page
+    if (currentPage !== numOfPages && currentPage !== numOfPages - 1) {
+      paginationBtns.push(
+        addPaginationBtn({
+          pageNumber: currentPage + 1,
+          activeClass: false,
+        })
+      );
+    }
+
+    // dots
+    if (currentPage < numOfPages - 2) {
+      paginationBtns.push(
+        <span className="page-btn dots" key="dots+1">
+          ...
+        </span>
+      );
+    }
+
+    // last page
+    paginationBtns.push(
+      addPaginationBtn({
+        pageNumber: numOfPages,
+        activeClass: currentPage === numOfPages,
+      })
+    );
+
+    return paginationBtns;
   };
 
   return (
@@ -34,21 +116,7 @@ function PageBtnContainer() {
       </button>
       {/* )} */}
 
-      <div className="btn-container">
-        {pagination.map((pageNum) => {
-          return (
-            <button
-              key={pageNum}
-              className={`btn page-btn ${
-                pageNum === currentPage ? 'active' : ''
-              }`}
-              onClick={() => handlePageNumber(pageNum)}
-            >
-              {pageNum}
-            </button>
-          );
-        })}
-      </div>
+      <div className="btn-container">{renderPaginationBtns()}</div>
 
       {/* {currentPage < numOfPages && ( */}
       <button
