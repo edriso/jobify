@@ -10,7 +10,7 @@
     "server": "nodemon server.js --ignore client",
     "client": "npm run dev --prefix client",
     "setup-app": "npm install && cd client && npm install",
-    "setup-app-production": "npm run setup && cd client && npm run build",
+    "setup-app-production": "npm run setup-app && cd client && npm run build",
     "build-app": "cd client && npm run build",
     "seed:jobs": "node ./utils/jobSeeder"
   },
