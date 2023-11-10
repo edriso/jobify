@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "c4b43da5-8f9b-4b32-a6c8-eb415d5b01d5",
+		"name": "Jobify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15155550"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"luigi\",\r\n    \"email\": \"luigi@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"location\": \"Japan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"butter@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Get All Jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs?search=design&jobStatus=all&jobType=all&sort=oldest",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "design"
+								},
+								{
+									"key": "jobStatus",
+									"value": "all"
+								},
+								{
+									"key": "jobType",
+									"value": "all"
+								},
+								{
+									"key": "sort",
+									"value": "oldest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"company\":\"Skinte\",\r\n    \"position\":\"Senior Financial Analyst\",\r\n    \"jobLocation\":\"Tonshayevo\",\r\n    \"jobStatus\":\"pending\",\r\n    \"jobType\":\"internship\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jobs",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs/6533a941d015dc212ed0bf5e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"6533a941d015dc212ed0bf5e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"company\": \"google\",\r\n    \"jobStatus\": \"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/jobs/6533888cc781f1a0b04bf317",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"6533888cc781f1a0b04bf317"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs/6533a941d015dc212ed0bf5e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"6533a941d015dc212ed0bf5e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs/stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/current-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get App Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/admin/app-stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"admin",
+								"app-stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mario\",\r\n    \"lastName\": \"Super\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"location\": \"Japan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/update-user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"update-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
