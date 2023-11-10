@@ -53,6 +53,8 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
 - React.js
 - styled-components
 - react-toastify
+- recharts
+- axios
 - jsonwebtoken (JWT)
 - cookie-parser, to access cookies
 - express-validator, to make validation layers
@@ -60,7 +62,10 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
 - express-async-errors, for async errors handling
 - concurrently, to run multiple commands concurrently
 - Connect client and server using Proxy - solves CORS problem -
-- axios
+- multer, for image uploads
+- datauri
+- cloudinary
+- dayjs
 - morgan
 
 #### Takeaways and Useful Resources
