@@ -5,38 +5,46 @@ A job tracking MERN application.
 - Where user can register, login, and update account
 - Then user can create job applications, and keep track of them, and only that user who can see, or modify the job using JWT
 
-### Getting Started with Jobify
+### Getting Started
 
 1. **Clone the Repository:**
 
-   Clone the Jobify repository to your local machine using the following command:
+   - Clone the Jobify repository to your local machine using the following command:
+     ```bash
+     git clone https://github.com/edriso/jobify.git
+     ```
 
-   ```bash
-   git clone https://github.com/edriso/jobify.git
-   ```
+2. **Configure Environment Variables:**
 
-2. **Setup the Application:**
+   - Rename the `.env.example` file to `.env` and fill in the required variables according to your configuration.
 
-   Navigate to the project directory and set up the application dependencies using the provided setup script:
+3. **Setup the Application:**
 
-   ```bash
-   cd jobify
-   npm run setup
-   ```
-
-3. **Configure Environment Variables:**
-
-   Rename the `.env.example` file to `.env` and fill in the required variables according to your configuration.
+   - **Development Mode:**
+     - Navigate to the project directory and set up the application dependencies using the provided setup script:
+       ```bash
+       cd jobify
+       npm run setup-app
+       ```
+   - **Production Mode:**
+     - Set up and build the application for production by running:
+     ```bash
+     npm run setup-app-production
+     ```
 
 4. **Start the Application:**
+   - **Development Mode:**
+     - Launch the application in development mode:
+       ```bash
+       npm run dev
+       ```
+   - **Production Mode:**
+     - To start the application in production, run:
+       ```bash
+       npm start
+       ```
 
-   Launch Jobify application on development by running the following command:
-
-   ```bash
-   npm run dev
-   ```
-
-Now, you have Jobify up and running on your local machine! Visit the specified localhost address in your browser to access the application.
+Now, Jobify is up and running on your local machine! Visit the specified localhost address in your browser to access the application.
 
 #### Technologies and Packages Used
 
