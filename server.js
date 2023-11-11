@@ -15,9 +15,9 @@ import userRouter from './routes/userRouter.js';
 import notFoundMiddleware from './middleware/notFoundMiddleware.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
-import rateLimiter from './middleware/rateLimiter.js';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
+import rateLimiter from './middleware/rateLimiter.js';
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -35,15 +35,14 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.static(path.resolve(__dirname, './client/dist')));
 app.use(cookieParser());
 app.use(express.json());
-app.use(rateLimiter());
 app.use(helmet());
 app.use(mongoSanitize());
 
 app.get('/api/v1', (req, res) => {
   res.send('<h1>Jobify API!</h1>');
 });
-app.use('/api/v1/jobs', authenticateUser, jobRouter);
-app.use('/api/v1/users', authenticateUser, userRouter);
+app.use('/api/v1/jobs', [rateLimiter(), authenticateUser], jobRouter);
+app.use('/api/v1/users', [rateLimiter(), authenticateUser], userRouter);
 app.use('/api/v1/auth', authRouter);
 
 app.get('*', (req, res) => {
