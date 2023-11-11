@@ -55,6 +55,7 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
 - react-toastify
 - recharts
 - axios
+- react-query (v4)
 - jsonwebtoken (JWT)
 - cookie-parser, to access cookies
 - express-validator, to make validation layers
@@ -179,3 +180,5 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
   - When sending a file to your server, such as when uploading a user avatar, ensure to include the `encType="multipart/form-data"` property in your form element. This is crucial for allowing the correct transmission of files from the client to the server. It indicates that the form will be used to upload binary data, such as files. Keep in mind that files are not sent as JSON data but as binary data, and `multipart/form-data` is the appropriate content type for handling file uploads.
 
   - When using platforms like Heroku or other cloud hosting services, files stored in the server's local filesystem might be deleted when the server restarts or goes to sleep due to the stateless nature of these platforms. It's always recommended to use cloud storage solutions like Amazon S3, Google Cloud Storage, or similar services to store files persistently, especially if you are hosting your application on platforms like Heroku or Render. These cloud storage solutions provide reliable and persistent storage for files, ensuring they are not lost even if the server restarts or goes to sleep.
+
+  - [React Query](https://tanstack.com/query/v4/docs/react/overview) is a powerful library that simplifies data fetching, caching, and synchronization in React applications. It provides a declarative and intuitive way to manage remote data by abstracting away the complex logic of fetching and caching data from APIs. React Query offers features like automatic background data refetching, optimistic updates, pagination support, and more, making it easier to build performant and responsive applications that rely on fetching and manipulating data.
