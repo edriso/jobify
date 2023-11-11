@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <DashboardLayout checkDefaultTheme={checkDefaultTheme} />,
-        loader: dashboardLoader,
+        loader: dashboardLoader(queryClient),
         children: [
           {
             index: true,

@@ -1,20 +1,22 @@
 import { createContext, useContext, useState } from 'react';
-import {
-  Outlet,
-  redirect,
-  useLoaderData,
-  useNavigate,
-  useNavigation,
-} from 'react-router-dom';
+import { Outlet, redirect, useNavigate, useNavigation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
 import Wrapper from '../assets/styledWrappers/Dashboard';
 import { Loading, Navbar, SidebarBig, SidebarSmall } from '../components';
 import apiHandler from '../utils/apiHandler';
 
-export const loader = async () => {
-  try {
-    const { data } = await apiHandler('/users/current-user');
+const userQuery = {
+  queryKey: ['user'],
+  queryFn: async () => {
+    const { data } = await apiHandler.get('/users/current-user');
     return data;
+  },
+};
+
+export const loader = (queryClient) => async () => {
+  try {
+    return await queryClient.ensureQueryData(userQuery);
   } catch (error) {
     return redirect('/');
   }
@@ -23,7 +25,7 @@ export const loader = async () => {
 const DashboardContext = createContext();
 
 function DashboardLayout({ checkDefaultTheme }) {
-  const { user } = useLoaderData();
+  const { user } = useQuery(userQuery)?.data;
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
