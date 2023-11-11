@@ -29,10 +29,10 @@ function SearchContainer() {
   return (
     <Wrapper>
       <Form className="form">
-        <h5 className="form-title">Search form</h5>
+        <h5 className="form-title">Search specific jobs</h5>
         <div className="form-center">
           <FormRow
-            labelText="Search for position or company"
+            labelText="position or company"
             type="search"
             name="search"
             defaultValue={search}
