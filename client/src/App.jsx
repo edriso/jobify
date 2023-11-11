@@ -15,6 +15,7 @@ import {
   Admin,
   EditJob,
 } from './pages';
+import ErrorElement from './components/ErrorElement';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
 import { loader as allJobsLoader } from './pages/AllJobs';
 import { loader as editJobLoader } from './pages/EditJob';
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
             path: 'stats',
             element: <Stats />,
             loader: statsLoader,
+            errorElement: <ErrorElement />,
           },
           {
             path: 'all-jobs',
