@@ -46,9 +46,9 @@ function DashboardLayout({ checkDefaultTheme, queryClient }) {
   const logoutUser = async () => {
     try {
       await apiHandler.get('/auth/logout');
-      navigate('/');
       queryClient.invalidateQueries();
       toast.success('Logged out');
+      navigate('/');
     } catch (error) {
       toast.error('Something went wrong!');
     }
