@@ -13,7 +13,6 @@ import apiHandler from '../utils/apiHandler';
 export const loader = async ({ params }) => {
   try {
     const { data } = await apiHandler.get(`/jobs/${params.id}`);
-    console.log(data);
     return data;
   } catch (error) {
     toast.error(error?.response?.data?.message);
