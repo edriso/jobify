@@ -185,3 +185,5 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
 
   - We primarily employed react-query for query caching. However, we identified an issue when logging out and then logging in with a different user—the data from the previous user was cached. The same problem occurred when updating user information in the profile page. To address this, we implemented query invalidation in three key locations: the Login page, when logging out in the DashboardLayout, and in the Profile when updating information before displaying the success toast.
     Additionally, it's important to note that `queryClient.invalidateQueries()` invalidates all queries, while `queryClient.invalidateQueries(['user'])` specifically invalidates the 'user' query.
+
+  - Pay attention to how Axios interceptors are implemented in the DashboardLayout page, providing an automatic logout mechanism in case of errors (such as attempting a request after the expiration of cookies).
