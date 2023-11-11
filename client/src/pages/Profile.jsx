@@ -4,21 +4,25 @@ import { FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 import apiHandler from '../utils/apiHandler';
 
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const file = formData.get('avatar');
-  if (file && file.size > 500000) {
-    toast.error('Image size too large');
-    return null;
-  }
-  try {
-    await apiHandler.patch('/users/update-user', formData);
-    toast.success('Profile updated successfully');
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-  }
-  return null;
-};
+export const action =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const file = formData.get('avatar');
+    if (file && file.size > 500000) {
+      toast.error('Image size too large');
+      return null;
+    }
+    try {
+      await apiHandler.patch('/users/update-user', formData);
+      queryClient.invalidateQueries(['user']);
+      toast.success('Profile updated successfully');
+      return redirect('/dashboard');
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return error;
+    }
+  };
 
 function Profile() {
   const { user } = useOutletContext();

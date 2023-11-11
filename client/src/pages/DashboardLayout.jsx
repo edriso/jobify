@@ -24,7 +24,7 @@ export const loader = (queryClient) => async () => {
 
 const DashboardContext = createContext();
 
-function DashboardLayout({ checkDefaultTheme }) {
+function DashboardLayout({ checkDefaultTheme, queryClient }) {
   const { user } = useQuery(userQuery)?.data;
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -47,6 +47,7 @@ function DashboardLayout({ checkDefaultTheme }) {
     try {
       await apiHandler.get('/auth/logout');
       navigate('/');
+      queryClient.invalidateQueries();
       toast.success('Logged out');
     } catch (error) {
       toast.error('Something went wrong!');
