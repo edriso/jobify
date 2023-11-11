@@ -60,7 +60,7 @@ function DashboardLayout({ checkDefaultTheme, queryClient }) {
       return response;
     },
     (error) => {
-      if (error?.response?.status === 401 || error?.response?.status === 429) {
+      if (error?.response?.status === 401) {
         setIsAuthError(true);
       }
       return Promise.reject(error);
