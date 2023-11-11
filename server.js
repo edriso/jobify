@@ -15,6 +15,8 @@ import userRouter from './routes/userRouter.js';
 import notFoundMiddleware from './middleware/notFoundMiddleware.js';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import { authenticateUser } from './middleware/authMiddleware.js';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -25,13 +27,15 @@ cloudinary.config({
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 // app.use(express.static(path.resolve(__dirname, './public')));
 app.use(express.static(path.resolve(__dirname, './client/dist')));
 app.use(cookieParser());
 app.use(express.json());
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+app.use(helmet());
+app.use(mongoSanitize());
 
 app.get('/api/v1', (req, res) => {
   res.send('<h1>Jobify API!</h1>');
