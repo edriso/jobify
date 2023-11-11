@@ -103,7 +103,7 @@ const router = createBrowserRouter([
           {
             path: 'edit-job/:id',
             element: <EditJob />,
-            loader: editJobLoader(queryClient),
+            loader: editJobLoader,
             action: editJobAction(queryClient),
             errorElement: <ErrorElement />,
           },
