@@ -29,7 +29,7 @@ A job tracking MERN application.
    - **Production Mode:**
      - Set up and build the application for production by running:
      ```bash
-     npm run setup-app-production
+     npm run build-app-production
      ```
 
 4. **Start the Application:**
