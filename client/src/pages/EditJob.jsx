@@ -16,7 +16,7 @@ export const loader = async ({ params }) => {
     console.log(data);
     return data;
   } catch (error) {
-    toast.error('Invalid job id');
+    toast.error(error?.response?.data?.message);
     return redirect('/dashboard/all-jobs');
   }
 };
