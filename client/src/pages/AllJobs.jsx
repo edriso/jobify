@@ -6,7 +6,7 @@ import { JobsContainer, SearchContainer } from '../components';
 import apiHandler from '../utils/apiHandler';
 
 const allJobsQuery = (params) => {
-  const { search, jobStatus, jobType, sort, page } = params;
+  const { search, jobStatus, jobType, sort, page } = params || {};
   return {
     queryKey: [
       'jobs',
@@ -48,7 +48,7 @@ function AllJobs() {
 
   return (
     <AllJobsContext.Provider value={{ data, searchValues }}>
-      <SearchContainer />
+      {searchValues && <SearchContainer />}
       <JobsContainer />
     </AllJobsContext.Provider>
   );
