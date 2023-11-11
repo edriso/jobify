@@ -1,24 +1,32 @@
-import {
-  Form,
-  redirect,
-  useLoaderData,
-  // useParams,
-} from 'react-router-dom';
+import { Form, redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
 import apiHandler from '../utils/apiHandler';
 
-export const loader = async ({ params }) => {
-  try {
-    const { data } = await apiHandler.get(`/jobs/${params.id}`);
-    return data;
-  } catch (error) {
-    toast.error('Invalid job id');
-    return redirect('/dashboard/all-jobs');
-  }
+const singleJobQuery = (id) => {
+  return {
+    queryKey: ['job', id],
+    queryFn: async () => {
+      const { data } = await apiHandler.get(`/jobs/${id}`);
+      return data;
+    },
+  };
 };
+
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      await queryClient.ensureQueryData(singleJobQuery(params.id));
+      return params.id;
+    } catch (error) {
+      toast.error('Invalid job id');
+      return redirect('/dashboard/all-jobs');
+    }
+  };
 
 export const action =
   (queryClient) =>
@@ -37,9 +45,12 @@ export const action =
   };
 
 function EditJob() {
-  // const params = useParams(); // in case we needed jobId in the component
-  // console.log(params); //{id: "653ecdc0c8f39065e8fd632c"}
-  const { job } = useLoaderData();
+  // const id = useLoaderData();
+  //// we can also get jobId from useParams hook
+  const params = useParams();
+  const {
+    data: { job },
+  } = useQuery(singleJobQuery(params.id));
   return (
     <Wrapper>
       <Form method="post" className="form">
