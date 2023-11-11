@@ -5,18 +5,21 @@ import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
 import apiHandler from '../utils/apiHandler';
 
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  try {
-    await apiHandler.post('/jobs', data);
-    toast.success('Job added Successfully');
-    return redirect('/dashboard/all-jobs');
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return error;
-  }
-};
+export const action =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+      await apiHandler.post('/jobs', data);
+      queryClient.invalidateQueries(['jobs']);
+      toast.success('Job added Successfully');
+      return redirect('/dashboard/all-jobs');
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return error;
+    }
+  };
 
 function AddJob() {
   const { user } = useOutletContext();

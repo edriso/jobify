@@ -20,24 +20,26 @@ export const loader = async ({ params }) => {
   }
 };
 
-export const action = async ({ request, params }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  try {
-    await apiHandler.patch(`/jobs/${params.id}`, data);
-    toast.success('Job edited successfully');
-    return redirect('/dashboard/all-jobs');
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return error;
-  }
-};
+export const action =
+  (queryClient) =>
+  async ({ request, params }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+      await apiHandler.patch(`/jobs/${params.id}`, data);
+      queryClient.invalidateQueries(['jobs']);
+      toast.success('Job edited successfully');
+      return redirect('/dashboard/all-jobs');
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return error;
+    }
+  };
 
 function EditJob() {
   // const params = useParams(); // in case we needed jobId in the component
   // console.log(params); //{id: "653ecdc0c8f39065e8fd632c"}
   const { job } = useLoaderData();
-
   return (
     <Wrapper>
       <Form method="post" className="form">
