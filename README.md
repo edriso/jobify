@@ -68,6 +68,7 @@ Now, Jobify is up and running on your local machine! Visit the specified localho
 - cloudinary
 - dayjs
 - morgan
+- security packages (helmet, express-mongo-sanitize, express-rate-limit)
 
 #### Takeaways and Useful Resources
 
