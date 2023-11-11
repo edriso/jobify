@@ -11,7 +11,7 @@
     "client": "npm run dev --prefix client",
     "setup-app": "npm install && cd client && npm install",
     "build-client": "cd client && npm run build",
-    "build-app-production": "npm run setup-app && npm run build-client",
+    "build-app-production": "npm install && cd client && npm install && npm run build",
     "seed-jobs": "node ./utils/jobSeeder"
   },
   "repository": {
