@@ -4,6 +4,11 @@ import { useAllJobsContext } from '../pages/AllJobs';
 import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
 import Wrapper from '../assets/styledWrappers/DashboardFormPage';
 
+/* In the SearchContainer, if no 'post' method is specified in the form
+ * the browser defaults to a 'get' request to the same URL
+ * and input values are then provided as query parameters
+ */
+
 const debounce = (onChange) => {
   let timeout;
   return (e) => {
